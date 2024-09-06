@@ -1,10 +1,21 @@
 drop table if exists recipe;
 drop table if exists category;
 
+-- Create comment table
+CREATE TABLE comments (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    recipe_id INTEGER NOT NULL,
+    user_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    comment TEXT NOT NULL,
+    rating TINYINT(1) NOT NULL,
+    FOREIGN KEY (recipe_id) REFERENCES recipe(id)
+);
+
 -- Create category table
 create table category (
     id integer not null primary key autoincrement,
-    name varchar(80) not null
+    category varchar(80) not null
 );
 
 -- Insert sample categories
@@ -26,11 +37,11 @@ create table recipe (
     instructions TEXT not null,
     preparation_time integer not null,
     cook_time integer not null,
-    rating integer default NULL,
+    rating DECIMAL(2,1) default NULL,
     img varchar(80) not null,
     calories integer not null,
     category_id integer not null,
-    bookmarked integer default 0,
+    bookmark TINYINT(1) default 0,
     foreign key (category_id) references category(id)
 );
 
@@ -47,7 +58,7 @@ insert into recipe values (
     'img/1.jpg', 
     743,
     1, -- Pasta category
-    0
+    1
 );
 insert into recipe values (
     null, 

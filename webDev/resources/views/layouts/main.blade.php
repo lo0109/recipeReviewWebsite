@@ -133,7 +133,7 @@ rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bR
         <!-- Navigation Links: Use d-flex to align horizontally -->
         <ul class="navbar-nav d-flex flex-row me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active px-3" aria-current="page" href="#">Home</a>
+            <a class="nav-link active px-3" aria-current="page" href="#">@yield('title')</a>
           </li>
           <li class="nav-item">
             <a class="nav-link px-3" href="#">Bookmarked</a>
