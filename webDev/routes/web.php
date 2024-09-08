@@ -65,7 +65,7 @@ Route::get('recipe/{id}', function ($id) {
 		};
 
 	// Fetch the comments for the recipe
-	$commentSql = "SELECT * FROM comments as c, users as u 
+	$commentSql = "SELECT * FROM users as u, comments as c
 								WHERE c.user_id = u.id
 								and recipe_id = ?";
 	$comments = DB::select($commentSql, [$id]);
@@ -295,7 +295,39 @@ Route::post('/edit_item/{id}', function ($id) {
 
 Route::post('/delete_item/{id}', function ($id) {
 	// Delete the recipe from the database
+	DB::delete("DELETE FROM comment WHERE recipe_id = ?", [$id]);
 	DB::delete("DELETE FROM recipe WHERE id = ?", [$id]);
 
 	return redirect('/');
+});
+
+Route::get('/comment/edit/{id}', function ($id) {
+	// Fetch the comment by ID
+	$comment = DB::select("SELECT * FROM comments WHERE id = ?", [$id]);
+	if (count($comment) == 1 && session('user_id') == $comment[0]->user_id) {
+		return view('edit_comment', ['comment' => $comment[0]]);
+} else {
+		return back();
+}
+});
+
+// Route to update the comment in the database
+Route::post('/comment/update/{id}', function ($id) {
+	$comment = request('comment');
+	$rating = request('rating');
+	$recipe = DB::select("SELECT recipe_id FROM comments WHERE id = ?", [$id]);
+	$recipe = $recipe[0]->recipe_id;
+	DB::update("UPDATE comments SET comment = ?, rating = ? WHERE id = ?", [$comment, $rating, $id]);
+
+	return redirect("/recipe/$recipe");
+	// return dd($recipe[0]->recipe_id);
+
+
+});
+
+// Route to delete a comment
+Route::post('/comment/delete/{id}', function ($id) {
+	// Only delete the comment if the current user is the owner
+	DB::delete("DELETE FROM comments WHERE id = ?", [$id]);
+	return back();
 });

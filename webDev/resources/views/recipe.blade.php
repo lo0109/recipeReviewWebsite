@@ -69,7 +69,6 @@
 				<form action="/comment/{{$recipe->id}}" method="POST">
 				@csrf <!-- This generates the CSRF token for security -->
 				<input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
-				<p>{{$recipe->id}}</p>
 				<div class="mb-3">
 					<h4>Leave a Comment</h4>
 					<strong>Your Name: {{session('user_name')}}</strong>
@@ -77,9 +76,6 @@
 				<div class="mb-3">
 					<label for="comment" class="form-label">Comment</label>
 					<input class="form-control" id="comment" name="comment" rows="4" placeholder="Pleaes enter at least 3 words." pattern="(\b[A-Za-z]+\b[\s]*){3,}" title="Please enter at least 3 words." required></input>
-					@if (!empty($error))
-						<div class="alert alert-danger">{{ $error }}</div>
-					@endif
 				</div>
 				<div class="mb-3">
 					<label>Rating: </label>
@@ -102,8 +98,12 @@
 							<p>Comment date:{{$comment-> c_date}}</p>
 							<p>{{ $comment->comment }}</p>
 							@if (session()->has('user_id') && session('user_id') == $comment->user_id)
-									<button class="btn btn-warning" href="">Edit</button>
-									<button type="submit" class="btn btn-danger" href="">Delete</button>
+								<a class="btn btn-warning" href="/comment/edit/{{ $comment->id }}">Edit</a>
+								<form action="/comment/delete/{{ $comment->id }}" method="POST" 
+									onsubmit="return confirm('Are you sure you want to delete this comment?');">
+									@csrf
+									<button type="submit" class="btn btn-danger">Delete</button>
+								</form>
 							@endif
 							<hr>
 						</div>
