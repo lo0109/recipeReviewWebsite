@@ -59,7 +59,10 @@ Route::get('recipe/{id}', function ($id) {
 	
 	if (count($recipe)!=1) {
 		die("Something went wrong: $sql");  // database error
-	}
+	}	elseif ($recipe[0]->user_id != null) {
+			$user = DB::select("SELECT * FROM users WHERE id = ?", [$recipe[0]->user_id]);
+			$author_name = $user[0]->user_name;
+		};
 
 	// Fetch the comments for the recipe
 	$commentSql = "SELECT * FROM comments as c, users as u 
@@ -78,7 +81,7 @@ Route::get('recipe/{id}', function ($id) {
 		}
 	}
 	// Pass the recipe data to the view
-	return view('recipe', ['recipe' => $recipe[0], 'userHasCommented' => $userHasCommented, 'comments' => $comments]);
+	return view('recipe', ['recipe' => $recipe[0], 'userHasCommented' => $userHasCommented,'author_name'=>$author_name ?? null, 'comments' => $comments]);
 });
 
 // Bookmark toggle route - toggles the bookmark status of a recipe

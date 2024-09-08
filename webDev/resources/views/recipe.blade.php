@@ -31,8 +31,8 @@
 					<h1>{{ $recipe->recipe}}</h1>
 				</div>
 				<div class="col-md-3">
-					<small>Updated by: {{$recipe->user_name ?? 'Admin'}}</small><br>
-					<small>On: {{$recipe->c_date ?? 'No update'}}</small>
+					<small>Updated by: {{$author_name ?? 'Admin'}}</small><br>
+					<small>On: {{$recipe->update_time ?? 'No update'}}</small>
 					@if(session()->has('user_name'))
 						<a class="btn btn-warning" href='/edit_item/{{$recipe->id}}'>Edit Recipe</a>
 						<form action="/delete_item/{{$recipe->id}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
@@ -76,7 +76,10 @@
 				</div>
 				<div class="mb-3">
 					<label for="comment" class="form-label">Comment</label>
-					<textarea class="form-control" id="comment" name="comment" rows="4" placeholder="comment..." required></textarea>
+					<input class="form-control" id="comment" name="comment" rows="4" placeholder="Pleaes enter at least 3 words." pattern="(\b[A-Za-z]+\b[\s]*){3,}" title="Please enter at least 3 words." required></input>
+					@if (!empty($error))
+						<div class="alert alert-danger">{{ $error }}</div>
+					@endif
 				</div>
 				<div class="mb-3">
 					<label>Rating: </label>
@@ -116,3 +119,21 @@
   </div>
 </div>
 @endsection
+
+<!-- @section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const commentInput = document.getElementById('comment');
+        commentInput.addEventListener('input', function () {
+            const pattern = /(\b[A-Za-z]+\b[\s]*){3,}/;
+            if (commentInput.validity.patternMismatch) {
+                commentInput.setCustomValidity("Please enter at least 3 words in your comment.");
+            } else {
+                commentInput.setCustomValidity(''); // Reset the message
+            }
+        });
+        
+
+    });
+</script>
+@endsection -->
