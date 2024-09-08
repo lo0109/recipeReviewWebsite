@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 // Home route - lists all recipes
 Route::get('/', function () {
 	// Fetch all recipes from the database
-	//DB::select() with bound parameters (? placeholders), the input data is automatically escaped, preventing malicious SQL queries from being executed.
 	$sql = "SELECT * FROM category as c, recipe as r
 	WHERE c.id = r.category_id";	
 	$sort = request('sort_by');
@@ -207,7 +206,7 @@ Route::post('/signup', function() {
 	$user_name = request('user_name');
 	$email = request('email');
 
-	// server-side validation for all forms using Laravel's validation system to ensure the integrity of user inputs. 
+	// A name (user, item, and manufacturer) must have more than 2 characters and cannot have the following symbols: -, _, +, ". 
 	$name_errors = [];
 	$email_errors = [];
 	if (strlen(trim($user_name)) < 3) {

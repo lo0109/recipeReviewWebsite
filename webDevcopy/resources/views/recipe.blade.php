@@ -14,8 +14,6 @@
 			<h4>Ingredients</h4>
 			<ul>
 				@foreach(explode(';', $recipe->ingredients) as $ingredient)
-				<!-- To prevent Cross-Site Scripting (XSS) attacks {{ }} automatically escapes any HTML tags 
-				 in user inputs, preventing malicious scripts from being executed.-->
 					<li>{{ $ingredient }}</li>
 				@endforeach
 			</ul>
@@ -59,7 +57,6 @@
 			@if(!session()->has('user_name'))
 				<h5>Login/SignUp to leave a comment</h5>
 				<form action="/login" method="POST">
-					<!-- Cross-Site Request Forgery (CSRF) Protection: -->
 					@csrf
 					<div class="mb-3">
 						<input type="email" class="form-control" name="email" placeholder="Enter your email" required>
