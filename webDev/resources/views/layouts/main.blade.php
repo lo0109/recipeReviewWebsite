@@ -130,35 +130,72 @@ rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bR
           <strong>RecipeLand</strong>
         </a>
         
-        <!-- Navigation Links: Use d-flex to align horizontally -->
+        <!-- Navigation -->
         <ul class="navbar-nav d-flex flex-row me-auto mb-2 mb-md-0">
+          <!-- <li class="nav-item">
+            <a class="nav-link px-3" href="">Bookmarked</a>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link active px-3" aria-current="page" href="#">@yield('title')</a>
+            <a class="nav-link px-3" href="/add_item">Add new recipe</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-3" href="#">Bookmarked</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled px-3" aria-disabled="true">User</a>
-          </li>
+          <a class="nav-link px-3" href="/category">
+            Categories
+          </a>
+          <!-- <ul class="dropdown-menu">
+            
+            <li><a class="dropdown-item" href="#">Action</a></li>
+          </ul> -->
+        </li>
         </ul>
+        <!-- User Login/Logout -->
+        @if(session()->has('user_name'))
+          <div class="dropdown me-2">
+            <a class="btn btn-outline-success dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              Hello, {{ session('user_name') }}
+            </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            </ul>
+          </div>
+        @else
+          <!-- Login Form Dropdown -->
+          <div class="dropdown me-2">
+            <a class="btn btn-outline-success dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              Login
+            </a>
+            <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuLink">
+              <form action="/login" method="POST">
+                @csrf
+                <div class="mb-3">
+                  <input type="email" class="form-control" name="email" placeholder="Email..." required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login/SignUp</button>
+              </form>
+            </ul>
+          </div>
+        @endif
 
         <!-- Search Form -->
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>      
+        <form action="/search" method="GET" class="d-flex">
+          <input class="form-control me-2" type="search" name="search" placeholder="Search Recipes">
+          <button class="btn btn-outline-success me-2" type="submit">Search</button>
+        </form>
+      
+        <!-- Toggler Button for Collapse -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
-      <!-- Toggler Button for Collapse -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
     </div>
   </header>
 
 <main>
     @yield('content')
 </main>
+<!-- CSRF token for security -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <footer class="text-body-secondary py-5">
   <div class="container">

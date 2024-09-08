@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
   
-	  <form action="add_item" method="POST">
+	  <form action="add_item" method="POST" enctype="multipart/form-data">
 			@csrf <!-- This generates the CSRF token for security -->
 			<!-- Left Column: Ingredients -->
 			<div class="row">
@@ -33,14 +33,14 @@
 					<textarea type="text" class="form-control" name="summary" required></textarea>
 					<h4>Instructions</h4>
 					<label for="name" class="form-label">Please input the instructions of the recipe:</label>
-					<textarea type="text" class="form-control" name="instruction" rows="10" required></textarea>
+					<textarea type="text" class="form-control" name="instructions" rows="10" required></textarea>
 				</div>
 				<!-- Right Column -->
 				<div class="col-md-3">
 				<h4>Catagory:</h4>	
-				<label for="name" class="form-label">Please select the catagory:</label>
-					<select class="form-select" name="catagory" required>
-						<option selected>Catagory:</option>
+				<label for="name" class="form-label">Please select the category:</label>
+					<select class="form-select" name="category_id" required>
+						<option selected>Category:</option>
 						<option value="1">Pasta</option>
 						<option value="2">Salad</option>
 						<option value="3">Soup</option>
@@ -53,7 +53,8 @@
 					<h4>Upload Image</h4>
 					<div class="mb-3">
 						<label for="name" class="form-label">Please upload an image:</label>
-						<input type="file" class="form-control" name="img" required></textarea>
+						<!-- restrict file uploads to images only -->
+						<input type="file" class="form-control" name="img" accept="*.jpg"></textarea>
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
