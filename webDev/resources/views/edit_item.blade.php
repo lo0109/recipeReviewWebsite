@@ -37,19 +37,19 @@
       <!-- Preparation Time -->
       <div class="mb-3">
           <label for="preparation_time" class="form-label">Preparation Time (minutes)</label>
-          <input type="number" class="form-control" id="preparation_time" name="preparation_time" value="{{ $recipe->preparation_time }}" required>
+          <input type="number" class="form-control" id="preparation_time" name="preparation_time" min="1" value="{{ $recipe->preparation_time }}" required>
       </div>
 
       <!-- Cooking Time -->
       <div class="mb-3">
           <label for="cook_time" class="form-label">Cooking Time (minutes)</label>
-          <input type="number" class="form-control" id="cook_time" name="cook_time" value="{{ $recipe->cook_time }}" required>
+          <input type="number" class="form-control" id="cook_time" name="cook_time"  min="1" value="{{ $recipe->cook_time }}" required>
       </div>
 
       <!-- Calories -->
       <div class="mb-3">
           <label for="calories" class="form-label">Calories</label>
-          <input type="number" class="form-control" id="calories" name="calories" value="{{ $recipe->calories }}" required>
+          <input type="number" class="form-control" id="calories" name="calories" min="1" value="{{ $recipe->calories }}" required>
       </div>
 
       <!-- Category -->

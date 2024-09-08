@@ -15,13 +15,13 @@
 					<h4>Ingredients</h4>
 					<div class="mb-3">
 						<label for="name" class="form-label">Please input the ingredients:</label>
-						<textarea type="text" class="form-control" name="ingredients" rows="8" required></textarea>
+						<textarea type="text" class="form-control" name="ingredients" placeholder="Please use ; to indicate an newline. E.g. First Line.; Second." rows="8" required></textarea>
 						<label for="name" class="form-label">Please input the preparation time:</label>
-						<input type="integer" class="form-control" name="preparation_time" required></textarea>
+						<input type="number" class="form-control" name="preparation_time" min="1" title="Please enter a valid number." required>
 						<label for="name" class="form-label">Please input the cooking time:</label>
-						<input type="integer" class="form-control" name="cook_time" required></textarea>
+						<input type="number" class="form-control" name="cook_time" min="1" title="Please enter a valid number." required></textarea>
 						<label for="name" class="form-label">Please input the calories:</label>
-						<input type="integer" class="form-control" name="calories" required></textarea>
+						<input type="number" class="form-control" name="calories" min="1" title="Please enter a valid number." required></textarea>
 					</div>
 				</div>
 				<!-- Middle Column: Instructions -->
@@ -33,7 +33,7 @@
 					<textarea type="text" class="form-control" name="summary" required></textarea>
 					<h4>Instructions</h4>
 					<label for="name" class="form-label">Please input the instructions of the recipe:</label>
-					<textarea type="text" class="form-control" name="instructions" rows="10" required></textarea>
+					<textarea type="text" class="form-control" name="instructions" placeholder="Please use ; to indicate an newline. E.g. First Line.; Second." rows="10" required></textarea>
 				</div>
 				<!-- Right Column -->
 				<div class="col-md-3">
@@ -54,7 +54,7 @@
 					<div class="mb-3">
 						<label for="name" class="form-label">Please upload an image:</label>
 						<!-- restrict file uploads to images only -->
-						<input type="file" class="form-control" name="img" accept="*.jpg"></textarea>
+						<input type="file" class="form-control" name="img" accept="*.jpg" required></textarea>
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
