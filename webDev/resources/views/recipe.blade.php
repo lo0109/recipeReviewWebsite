@@ -14,8 +14,6 @@
 			<h4>Ingredients</h4>
 			<ul>
 				@foreach(explode(';', $recipe->ingredients) as $ingredient)
-				<!-- To prevent Cross-Site Scripting (XSS) attacks {{ }} automatically escapes any HTML tags 
-				 in user inputs, preventing malicious scripts from being executed.-->
 					<li>{{ $ingredient }}</li>
 				@endforeach
 			</ul>

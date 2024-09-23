@@ -296,7 +296,7 @@ Route::post('/edit_item/{id}', function ($id) {
 
 Route::post('/delete_item/{id}', function ($id) {
 	// Delete the recipe from the database
-	DB::delete("DELETE FROM comment WHERE recipe_id = ?", [$id]);
+	DB::delete("DELETE FROM comments WHERE recipe_id = ?", [$id]);
 	DB::delete("DELETE FROM recipe WHERE id = ?", [$id]);
 
 	return redirect('/');

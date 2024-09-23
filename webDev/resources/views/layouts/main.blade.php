@@ -195,7 +195,7 @@ rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bR
     @yield('content')
 </main>
 <!-- CSRF token for security -->
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 
 <footer class="text-body-secondary py-5">
   <div class="container">
